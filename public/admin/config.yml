@@ -1,30 +1,19 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: master
 
-media_folder: "public/images/uploads" # Où les médias uploadés seront stockés
-public_folder: "/images/uploads"
+media_folder: "public/images/uploads" # Où les images uploadées seront stockées
+public_folder: "/images/uploads" # Chemin public pour ces images
 
 collections:
-  - name: "post" # Identifiant de la collection
-    label: "Post" # Label affiché dans le CMS
-    folder: "src/pages/blog" # Dossier où sont stockés tes articles (adaptable selon ton arborescence)
-    create: true # Autorise la création de nouveaux articles
+  - name: "blog"
+    label: "Articles de Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {
-          label: "Layout",
-          name: "layout",
-          widget: "hidden",
-          default: "$/layouts/post.astro",
-        }
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date de publication", name: "pubDate", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Author", name: "author", widget: "string" }
-      - {
-          label: "Author Twitter Handle",
-          name: "authorTwitter",
-          widget: "string",
-        }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Contenu", name: "body", widget: "markdown" }
